@@ -1,0 +1,49 @@
+#logo {
+    width: 200px; /* Ширина фотографии */
+    height: 200px; /* Высота фотографии (идеальный круг) */
+    border-radius: 50%; /* Скругление круглой формы */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Стили для сообщений типа вопрос (пользовательский вопрос) */
+.user-question {
+    background-color: #f2f2f2; /* Серый фон */
+    padding: 10px; /* Отступы внутри элемента */
+    margin-bottom: 5px; /* Отступ снизу между сообщениями */
+    border-radius: 5px; /* Скругление углов */
+    list-style-type: none; /* Убираем маркеры списка */
+}
+
+/* Стили для сообщений типа ответ (ответ Джейсона) */
+.jason-answer {
+    background-color: #cce6ff; /* Синий фон */
+    padding: 10px; /* Отступы внутри элемента */
+    margin-bottom: 5px; /* Отступ снизу между сообщениями */
+    border-radius: 5px; /* Скругление углов */
+    list-style-type: none; /* Убираем маркеры списка */
+}
+
+#messagesList {
+    overflow-y: auto; /* Добавляем вертикальную полосу прокрутки */
+    max-height: 400px; /* Максимальная высота списка, чтобы не занимал слишком много места */
+}
+
+.favorite {
+    background-color: pink;
+}
+
+
+.custom-background {
+    background-color: lightblue; /* Новый цвет фона */
+}
+
+.message {
+    position: relative; /* Родительский элемент для кнопки */
+    padding-right: 30px; /* Добавляем отступ справа для кнопки */
+}
+
+.message button {
+    position: absolute; /* Абсолютное позиционирование кнопки */
+    bottom: 0; /* Помещаем кнопку внизу сообщения */
+    right: 0; /* Помещаем кнопку справа внутри сообщения */
+}
