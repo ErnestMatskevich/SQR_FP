@@ -9,7 +9,7 @@ let buttonActive = true;
 let API_URL = "http://127.0.0.1:8000/"
 
 async function sendMessage(){
-    console.log("I am sending request:");
+    // console.log("I am sending request:");
     if (!buttonActive) return;
     buttonActive = false;
     let login = document.getElementById("login_box").value;
@@ -23,7 +23,7 @@ async function sendMessage(){
 
     request.onload = async () => {
         let responseJson = JSON.parse(request.responseText);
-        console.log(responseJson);
+        //console.log(responseJson);
         let id = responseJson['id'];
         let answerText = responseJson['response'];
         await addMessage(answerText, id, MessageType.ANSWER);
@@ -39,7 +39,7 @@ async function sendMessage(){
                 "text": question
             }
         );
-    console.log(dataToSend);
+    //console.log(dataToSend);
     request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     request.send(
         dataToSend
@@ -61,7 +61,7 @@ async function likeMessage(message){
 
 
 async function loadMessages(){
-    console.log("trying to get messages")
+    //console.log("trying to get messages")
     let login = document.getElementById("login_box").value;
     let request = new XMLHttpRequest();
     request.open(
