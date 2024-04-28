@@ -7,17 +7,20 @@
     <title>Jason Statham psycho</title>
 </head>
 <body>
-
-    <div id="div">
+    <div id="content">
+    <div id="name">
     <img src="jason.png" alt="Jason Statham" id="logo">
     <p>What is your name?</p>
-    <input type="text" id = "login_box">
+    <input type="text" id = "login_box" placeholder="Enter your username here">
     <button onclick="loadMessages()" id="login_button">Show chat</button>
-    <input type="text" id="question_box">
+    </div>
+    <div id="chat">
+    <p>What would you like to ask?</p>
+    <input type="text" id="question_box" placeholder="Enter your question here">
     <button onclick="sendMessage()">Ask Jason</button>
         </div>
     <ul id="messagesList"></ul>
-
-
+    </div>
+</div>
 </body>
 </html>

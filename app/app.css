@@ -1,3 +1,75 @@
+body {
+    background-color: #797270;
+    /* Set background color */
+    display: flex;
+    justify-content: center;
+    /* Center contents horizontally */
+    align-items: center;
+    /* Center contents vertically */
+    height: 100vh;
+    /* Take the full height of the viewport */
+    margin: 0;
+    /* Remove default margin */
+}
+
+#content {
+    text-align: center;
+}
+
+#name,
+#chat {
+    margin-bottom: 20px;
+
+}
+
+p {
+    text-align: left;
+    /* Center the <p> element to the left */
+}
+
+button {
+    background-color: #453F3C;
+    color: white;
+        /* Set button text color */
+    width: 40%
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+        /* Increase size by 10% */
+        transition: transform 0.3s ease;
+            /* Add smooth transition to transform property */
+}
+
+input[type="text"] {
+    width: 100%;
+        /* Spread input fields to take up most of the available space */
+}
+
+#name input[type="text"],
+#chat input[type="text"] {
+    width: calc(100%);
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width */
+}
+
+input[type="text"],
+button {
+    font-size: 16px;
+            /* Increase button font size */
+    margin-bottom: 10px;
+    /* Add space between elements */
+    display: block;
+    /* Display inputs and buttons as block elements */
+    padding: 10px;
+        /* Add padding for better appearance */
+    border-radius: 10px;
+        /* Add border radius */
+    border: none;
+        /* Remove default border */
+}
+
 #logo {
     width: 200px; /* Ширина фотографии */
     height: 200px; /* Высота фотографии (идеальный круг) */
@@ -26,6 +98,8 @@
 #messagesList {
     overflow-y: auto; /* Добавляем вертикальную полосу прокрутки */
     max-height: 400px; /* Максимальная высота списка, чтобы не занимал слишком много места */
+    width: 600px; /* Set fixed width for better alignment */
+    padding: 0;
 }
 
 .favorite {
@@ -46,4 +120,14 @@
     position: absolute; /* Абсолютное позиционирование кнопки */
     bottom: 0; /* Помещаем кнопку внизу сообщения */
     right: 0; /* Помещаем кнопку справа внутри сообщения */
+}
+
+li {
+    margin-right: 10px;
+}
+
+li button {
+    width: 20%;
+    margin-right: 5px;
+    background-color: rgba(69, 63, 60, 0.8);
 }
