@@ -27,7 +27,7 @@ jobs:
       - name: Performance check with custom tool
         run: poetry run pytest tests/test_performance.py
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1
+        uses: sonarsource/sonarcloud-github-action@master
         with:
           projectBaseDir: ./
           organization: ernestmatskevich
