@@ -32,12 +32,10 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: '1.7.1'
+      - name: Install browser for UI tests
+        run: sudo apt-get install -y chromium-browser
       - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-          sudo apt-get install -y chromium-chromedriver
-          poetry install
+        run: poetry install
       - name: Update dependencies
         run: poetry lock
       - name: Reliability check with pytest

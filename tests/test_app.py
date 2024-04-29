@@ -3,6 +3,7 @@ import asyncio
 from app.api import *
 pytest_plugins = ('pytest_asyncio',)
 
+
 def test_read_text_from_prompt_file():
     file_path = "test_file.txt"
     with open(file_path, 'w', encoding='utf-8') as file:
