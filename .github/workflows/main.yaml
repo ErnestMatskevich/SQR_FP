@@ -1,0 +1,40 @@
+name: Statham project
+
+on: push
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: '1.7.1'
+      - name: Install dependencies
+        run: poetry install
+      - name: Update dependencies
+        run: poetry lock
+      - name: Coverage check
+        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=70
+      - name: Send mail if fail
+        if: failure ()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          # email body as text
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          # comma-separated string, send email to
+          to: arinazavelevic@gmail.com
+          # from email name
+          from: John Doe
