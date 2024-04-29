@@ -18,15 +18,16 @@ jobs:
         run: poetry install
       - name: Update dependencies
         run: poetry lock
-
-  reliability:
-    needs: build
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - name: Reliability check with pytest
+        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=70
+      - name: Security check with bandit
+        run: poetry run bandit -r app
+        continue-on-error: true
+      - name: Send custom Telegram message on failure
+        if: failure()
+        uses: appleboy/telegram-send-message@v2
         with:
-          python-version: '3.10'
-      - name: Coverage check
-        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
+          to: ${{ secrets.TELEGRAM_USER_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: "Something went wrong in the CI process. Please check your code and fix the issue."
 
