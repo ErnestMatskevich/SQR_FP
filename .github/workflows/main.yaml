@@ -25,7 +25,7 @@ jobs:
         continue-on-error: true
       - name: Send custom Telegram message on failure
         if: failure()
-        uses: appleboy/telegram-send-message@v2
+        uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_USER_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
