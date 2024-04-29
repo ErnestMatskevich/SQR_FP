@@ -22,7 +22,6 @@ app_api.add_middleware(
 )
 
 
-# Можно протестировать, что если файл с промптом пустой
 def read_text_from_prompt_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()

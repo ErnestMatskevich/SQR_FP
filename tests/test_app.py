@@ -1,5 +1,3 @@
-import pytest
-import asyncio
 from app.api import *
 pytest_plugins = ('pytest_asyncio',)
 

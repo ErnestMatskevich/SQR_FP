@@ -1,8 +1,6 @@
-import asyncio
 from app.api import *
 import os
 import datetime
-import pytest
 
 
 pytest_plugins = ('pytest_asyncio',)
