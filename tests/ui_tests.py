@@ -3,15 +3,18 @@ import time
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 
 FILE_NAME = os.path.join(os.path.abspath(os.curdir), "app", "app.html")
 
-options = Options()
-options.add_argument("--headless")
-driver = webdriver.Chrome(options=options)
+service = ChromeService(executable_path="/snap/bin/chromium.chromedriver")
+options = webdriver.ChromeOptions()
+options.headless = True
+
+driver=webdriver.Chrome(service=service, options=options)
 
 
 def logIntoAccount(login: str):
