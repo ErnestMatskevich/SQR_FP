@@ -1,7 +1,6 @@
 import traceback
 
 from fastapi import FastAPI
-import typing
 import sqlite3
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,7 +31,8 @@ def read_text_from_prompt_file(file_path):
 
 def delete_spec_symbols(question: str):
     """
-    Функция для очистки вопроса пользователя от специальных символов, которые могут сломать sql запрос к дб
+    Функция для очистки вопроса пользователя от специальных символов,
+    которые могут сломать sql запрос к дб
     """
     special_symbols = ['"', "'"]
     for symbol in special_symbols:
@@ -40,7 +40,6 @@ def delete_spec_symbols(question: str):
     return question
 
 
-# Здесь можно тестить успешное получение ответа от сервера (код 200), а также рассмотреть дугие кейсы (404, 403)
 async def send_prompt(user_question: str, prompt: str):
     id_key = "b1gum2orksfbmak13ar5"
     key = "AQVN0ypGVYUSvIFBATSkTgxxr6FczAWm5er78dc7"
@@ -82,15 +81,13 @@ class QuestionModel(BaseModel):
 async def transmit_messages(loginValue: str):
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM messages WHERE login=?', (loginValue,))
-    return {"content":
-        [
-            {"id": element[0],
-             "login": element[1],
-             "question": element[2],
-             "answer": element[3],
-             "favourite": element[4]}
-            for element in cursor.fetchall()
-        ]
+    return {"content": [
+        {"id": element[0],
+         "login": element[1],
+         "question": element[2],
+         "answer": element[3],
+         "favourite": element[4]}
+        for element in cursor.fetchall()]
     }
 
 
@@ -101,7 +98,8 @@ async def ask_question_API(login: str, question: QuestionModel):
     response = await send_prompt(user_question, text_prompt)
     cursor = connection.cursor()
     cursor.execute(
-        'INSERT INTO MESSAGES (login, question, answer, favourite) VALUES  (?, ?, ?, 0)',
+        'INSERT INTO MESSAGES (login, question, answer, favourite) '
+        'VALUES  (?, ?, ?, 0)',
         (login, user_question, response)
     )
     connection.commit()
@@ -117,15 +115,13 @@ async def getFavouriteMessages(login: str):
         "select * from messages where login=%s and favourite=1",
         (login,)
     )
-    return {"content":
-        [
-            {"id": element[0],
-             "login": element[1],
-             "question": element[2],
-             "answer": element[3],
-             "favourite": element[4]}
-            for element in cursor.fetchall()
-        ]
+    return {"content": [
+        {"id": element[0],
+         "login": element[1],
+         "question": element[2],
+         "answer": element[3],
+         "favourite": element[4]}
+        for element in cursor.fetchall()]
     }
 
 
@@ -139,7 +135,6 @@ async def likeMessage(login: str, message_id: int):
         )
         connection.commit()
         return 200
-    except Exception as e:
+    except Exception:
         print(traceback.format_exc())
         return 500
-
