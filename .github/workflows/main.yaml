@@ -3,7 +3,7 @@ name: Statham project
 on: push
 
 jobs:
- test:
+  test:
     runs-on: ubuntu-latest
     needs: build
     steps:
