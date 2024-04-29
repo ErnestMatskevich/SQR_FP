@@ -36,9 +36,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: "Something went wrong in the CI process. Please check your code and fix the issue."
   sonarcloud:
-
     name: SonarCloud
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - uses: actions/checkout@v3
         with:
