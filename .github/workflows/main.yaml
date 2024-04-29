@@ -23,6 +23,8 @@ jobs:
         run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
       - name: Security check with bandit
         run: poetry run bandit -r app
+      - name: Performance check with custom tool
+        run: poetry run pytest tests/test_performance.py
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
