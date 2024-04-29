@@ -26,11 +26,6 @@ jobs:
         run: poetry run bandit -r app
       - name: Performance check with custom tool
         run: poetry run pytest tests/test_performance.py
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: ./
-          entryPoint: 'sonar_project.properties'
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
@@ -38,4 +33,15 @@ jobs:
           to: ${{ secrets.TELEGRAM_USER_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: "Something went wrong in the CI process. Please check your code and fix the issue."
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
