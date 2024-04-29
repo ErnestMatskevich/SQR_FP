@@ -3,7 +3,7 @@ name: Statham project
 on: push
 
 jobs:
-  test:
+  build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +18,15 @@ jobs:
         run: poetry install
       - name: Update dependencies
         run: poetry lock
+
+  reliability:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
       - name: Coverage check
-        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=70
-        continue-on-error: true
+        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
+
