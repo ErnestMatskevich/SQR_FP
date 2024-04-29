@@ -30,8 +30,7 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
           projectBaseDir: ./
-          organization: ernestmatskevich
-          token: ${{ secrets.SONAR_TOKEN }}
+          entryPoint: 'sonar_project.properties'
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
