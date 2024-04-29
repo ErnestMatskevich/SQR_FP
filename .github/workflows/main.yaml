@@ -22,6 +22,7 @@ jobs:
         run: cd app; nohup poetry run python -m uvicorn api:app_api --reload &
   test:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -40,7 +41,7 @@ jobs:
       - name: Security check with bandit
         run: poetry run bandit -r app
       - name: Usability check with Selenium
-        run: cd ..; poetry run pytest tests/ui_tests.py
+        run: poetry run pytest tests/ui_tests.py
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
