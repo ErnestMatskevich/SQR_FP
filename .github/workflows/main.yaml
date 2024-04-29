@@ -26,6 +26,12 @@ jobs:
         run: poetry run bandit -r app
       - name: Performance check with custom tool
         run: poetry run pytest tests/test_performance.py
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v1
+        with:
+          projectBaseDir: ./
+          organization: ernestmatskevich
+          token: ${{ secrets.SONAR_TOKEN }}
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
