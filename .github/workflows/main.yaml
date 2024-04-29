@@ -23,7 +23,7 @@ jobs:
       - name: Security check with bandit
         run: poetry run bandit -r app
       - name: Usability check with Selenium
-        run: cd app; poetry run python -m uvicorn api:app_api --reload; cd ..; poetry run pytest tests/ui_tests.py
+        run: cd app; poetry run python -m uvicorn api:app_api --reload; chrome --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 app.html; cd ..; poetry run pytest tests/ui_tests.py
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master
