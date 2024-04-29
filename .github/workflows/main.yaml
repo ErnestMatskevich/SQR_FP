@@ -15,11 +15,7 @@ jobs:
         with:
           poetry-version: '1.7.1'
       - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-          sudo apt-get install -y chromium-chromedriver
-          poetry install
+        run: poetry install
       - name: Update dependencies
         run: poetry lock
       - name: Application run
@@ -37,7 +33,11 @@ jobs:
         with:
           poetry-version: '1.7.1'
       - name: Install dependencies
-        run: poetry install
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+          sudo apt-get install -y chromium-chromedriver
+          poetry install
       - name: Update dependencies
         run: poetry lock
       - name: Reliability check with pytest
