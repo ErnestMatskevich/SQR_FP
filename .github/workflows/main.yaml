@@ -22,7 +22,7 @@ jobs:
         run: poetry lock
       - name: Lint check with flake8
         run: poetry run flake8 app/api.py
-      - name: Reliability check with pytest
+      - name: Reliability check with Pytest
         run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
       - name: Security check with bandit
         run: poetry run bandit -r app
