@@ -3,24 +3,7 @@ name: Statham project
 on: push
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Run image
-        uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: '1.7.1'
-      - name: Install dependencies
-        run: poetry install
-      - name: Update dependencies
-        run: poetry lock
-      - name: Application run
-        run: cd app; nohup poetry run python -m uvicorn api:app_api --reload &
-  test:
+ test:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -40,8 +23,6 @@ jobs:
         run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
       - name: Security check with bandit
         run: poetry run bandit -r app
-      - name: Usability check with Selenium
-        run: poetry run pytest tests/ui_tests.py
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master

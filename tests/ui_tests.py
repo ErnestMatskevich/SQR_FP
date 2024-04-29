@@ -3,18 +3,15 @@ import time
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 
 FILE_NAME = os.path.join(os.path.abspath(os.curdir), "app", "app.html")
 
-service = ChromeService(executable_path="/snap/bin/chromium.chromedriver")
-options = webdriver.ChromeOptions()
-options.headless = True
-
-driver=webdriver.Chrome(service=service, options=options)
+options = Options()
+options.add_argument("--headless")
+driver = webdriver.Chrome(options=options)
 
 
 def logIntoAccount(login: str):
@@ -61,6 +58,7 @@ def testAddingToFavourites():
     logIntoAccount("test1")
     favouriteAnswers = driver.find_elements(By.CLASS_NAME, "favorite")
     assert len(favouriteAnswers) == 0
+
 
 def testAskQuestion():
     accountName = "test" + str(
