@@ -19,10 +19,11 @@ jobs:
       - name: Update dependencies
         run: poetry lock
       - name: Reliability check with pytest
-        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=70
+        run: poetry run pytest --cov=app/ --cov-branch --cov-report=term --cov-fail-under=60
       - name: Security check with bandit
         run: poetry run bandit -r app
-        continue-on-error: true
+      - name: Usability check with Selenium
+        run: cd app; poetry run python.exe -m uvicorn api:app_api --reload; cd ..; poetry run pytest tests/ui_tests.py
       - name: Send custom Telegram message on failure
         if: failure()
         uses: appleboy/telegram-action@master

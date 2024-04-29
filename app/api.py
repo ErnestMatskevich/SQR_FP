@@ -134,7 +134,7 @@ async def likeMessage(login: str, message_id: int):
     try:
         cursor = connection.cursor()
         cursor.execute(
-            f"UPDATE messages SET favourite=1 - favourite WHERE id = ?",
+            "UPDATE messages SET favourite=1 - favourite WHERE id = ?",
             (message_id,)
         )
         connection.commit()
